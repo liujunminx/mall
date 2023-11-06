@@ -1,0 +1,14 @@
+server:
+  port: 5002
+  servlet:
+    context-path: /user
+
+spring:
+  datasource:
+    username: root
+    password: r00tme
+    url: jdbc:mysql://localhost:3306/user
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
