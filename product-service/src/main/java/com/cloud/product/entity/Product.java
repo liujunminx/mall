@@ -1,24 +1,26 @@
-package com.cloud.user.entity;
+package com.cloud.product.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Table(name = "user")
 @Entity
+@Table(name = "product")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String username;
-    private String password;
-    private String salt;
+    private String name;
+    private String description;
+    private Double price;
+    private Integer stock;
     private LocalDateTime createdTime;
     private LocalDateTime updatedTime;
 

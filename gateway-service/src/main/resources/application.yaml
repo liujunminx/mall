@@ -3,5 +3,16 @@ server:
   servlet:
     context-path: /api
 spring:
+  main:
+    web-application-type: reactive
   application:
     name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: user-service-route
+          uri: http://localhost:5002/user
+          predicates:
+            - Path=/api/user/**
+      default-filters:
+        - StripPrefix=1
