@@ -19,11 +19,21 @@ public class ProductCategoryService {
 
     public List<ProductCategory> listTree() {
         List<ProductCategory> list = productCategoryRepository.findAll();
-        Map<Long, List<ProductCategory>> parentMapList = list.stream().collect(Collectors.groupingBy(ProductCategory::getParentId));
-        List<ProductCategory> root = parentMapList.get(0L);
-        return null;
+        Map<Long, List<ProductCategory>> parentListMap = list.stream().collect(Collectors.groupingBy(ProductCategory::getParentId));
+        List<ProductCategory> root = parentListMap.get(0L);
+        for (ProductCategory category : root) {
+            setChildren(parentListMap, category);
+        }
+        return root;
     }
 
-    private void setChildren(Map<Long, List<ProductCategory>> parentMapList, ProductCategory parent) {
+    private void setChildren(Map<Long, List<ProductCategory>> parentListMap, ProductCategory parent) {
+        if (parentListMap.containsKey(parent.getId())) {
+            List<ProductCategory> children = parentListMap.get(parent.getId());
+            parent.setChildren(children);
+            for (ProductCategory category: children) {
+                setChildren(parentListMap, category);
+            }
+        }
     }
 }

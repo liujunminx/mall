@@ -27,12 +27,12 @@ public class AuthService {
     }
 
     public boolean signIn(UserSignUpDto userDto) {
-        User existUser = userRepository.findByUsername(userDto.username());
-        if (existUser == null)
-            return true;
-        String salt = existUser.getSalt();
+        User user = userRepository.findByUsername(userDto.username());
+        if (user == null)
+            return false;
+        String salt = user.getSalt();
         String hashPassword = hashPassword(userDto.password(), salt);
-        return hashPassword.equals(existUser.getPassword());
+        return hashPassword.equals(user.getPassword());
     }
 
     public boolean exist(String username) {
