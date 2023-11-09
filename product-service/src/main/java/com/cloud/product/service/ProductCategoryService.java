@@ -27,6 +27,10 @@ public class ProductCategoryService {
         return root;
     }
 
+    public void save(List<ProductCategory> list) {
+        productCategoryRepository.saveAll(list);
+    }
+
     private void setChildren(Map<Long, List<ProductCategory>> parentListMap, ProductCategory parent) {
         if (parentListMap.containsKey(parent.getId())) {
             List<ProductCategory> children = parentListMap.get(parent.getId());

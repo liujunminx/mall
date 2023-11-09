@@ -2,6 +2,7 @@ package com.cloud.user.service;
 
 import com.cloud.user.dto.UserSignUpDto;
 import com.cloud.user.entity.User;
+import com.cloud.user.exception.InternalServerErrorException;
 import com.cloud.user.repository.UserRepository;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +43,7 @@ public class AuthService {
     private String generateSalt() {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
+
         random.nextBytes(salt);
         return Base64.getEncoder().encodeToString(salt);
     }
@@ -54,8 +56,8 @@ public class AuthService {
             byte[] hashPassword = md.digest(passwordWithSalt.getBytes());
             return Base64.getEncoder().encodeToString(hashPassword);
         } catch (NoSuchAlgorithmException e) {
-            log.error("Not found Algorithm: {}", algorithm);
-            throw new RuntimeException(e);
+            log.error("Not found Algorithm: {}", algorithm, e);
+            throw new InternalServerErrorException("Valid password error");
         }
     }
 }

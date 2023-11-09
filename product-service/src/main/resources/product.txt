@@ -1,0 +1,12 @@
+[
+    {"id": 1, "name": "苹果 MacBook Pro", "description": "搭载M1芯片，性能强大且快速.", "price": 12999.00, "stock": 50, "categoryId": 90},
+    {"id": 2, "name": "戴尔 XPS 13", "description": "轻薄便携，电池续航长久.", "price": 8999.00, "stock": 30, "categoryId": 90},
+    {"id": 3, "name": "华硕 ROG 游戏本", "description": "高性能电竞级配置，畅玩各类大型游戏.", "price": 19999.00, "stock": 20, "categoryId": 90},
+    {"id": 4, "name": "华为 MateBook D", "description": "轻薄全面屏设计，支持多屏协同办公.", "price": 4999.00, "stock": 40, "categoryId": 90},
+    {"id": 5, "name": "小米 Notebook Pro", "description": "全金属机身，搭载高性能独立显卡.", "price": 6999.00, "stock": 60, "categoryId": 90},
+    {"id": 6, "name": "联想 小新 Air 14", "description": "全金属轻薄机身，支持人脸识别登录.", "price": 5999.00, "stock": 70, "categoryId": 90},
+    {"id": 7, "name": "惠普 星14s 青春版", "description": "全高清屏幕，搭载第十一代酷睿处理器.", "price": 4499.00, "stock": 80, "categoryId": 90},
+    {"id": 8, "name": "荣耀 MagicBook V 14", "description": "超窄边框全面屏，搭载高性能独立显卡.", "price": 7999.00, "stock": 90, "categoryId": 90},
+    {"id": 9, "name": "微软 Surface Laptop Go", "description": "轻巧便捷，适合日常学习和工作使用.", "price": 6299.00, "stock": 100, "categoryId": 90},
+    {"id": 10, "name": "宏碁 Swift 3", "description": "全金属轻薄机身，搭载第十一代英特尔酷睿处理器。", "price": 5499.00, "stock": 110, "categoryId": 90}
+]

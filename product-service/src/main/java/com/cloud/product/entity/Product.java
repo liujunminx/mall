@@ -1,5 +1,6 @@
 package com.cloud.product.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,6 +24,7 @@ public class Product {
     private Integer stock;
     private LocalDateTime createdTime;
     private LocalDateTime updatedTime;
+    private Long categoryId;
 
     @PrePersist
     protected void onCreate() {

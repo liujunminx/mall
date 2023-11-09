@@ -4,9 +4,9 @@ import com.cloud.product.entity.ProductCategory;
 import com.cloud.product.service.ProductCategoryService;
 import jakarta.annotation.Resource;
 import lombok.Getter;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,7 +17,14 @@ public class ProductCategoryController {
     private ProductCategoryService productCategoryService;
 
     @GetMapping("/listTree")
-    public List<ProductCategory> listTree() {
-        return productCategoryService.listTree();
+    public ResponseEntity<List<ProductCategory>> listTree() {
+        List<ProductCategory> list = productCategoryService.listTree();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<String> save(@RequestBody List<ProductCategory> list) {
+        productCategoryService.save(list);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 }
