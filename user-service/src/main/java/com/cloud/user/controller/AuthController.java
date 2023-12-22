@@ -25,13 +25,13 @@ public class AuthController {
         if (authService.exist(user.username()))
             throw new ConflictException("Username already exists");
         authService.signUp(user);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+        return ResponseEntity.ok("OK");
     }
 
     @PostMapping("/signIn")
     public ResponseEntity<String> signIn(@RequestBody UserSignUpDto user) {
         if (authService.signIn(user))
-            return new ResponseEntity<>("OK", HttpStatus.OK);
+            return ResponseEntity.ok("OK");
         else
             throw new UnAuthorizedException("Username or password incorrectly");
     }
