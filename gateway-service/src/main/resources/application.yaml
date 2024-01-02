@@ -17,11 +17,11 @@ spring:
         - id: order-service-route
           uri: lb://order-service
           predicates:
-            - Path=/api/order
+            - Path=/api/order/**
         - id: product-service-route
           uri: lb://product-service
           predicates:
-            - Path=/api/product
+            - Path=/api/product/**
       default-filters:
         - StripPrefix=1
 eureka:

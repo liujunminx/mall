@@ -18,7 +18,6 @@ public class ProductService {
     public void save(List<Product> list) {
         productRepository.saveAll(list);
     }
-
     public Page<Product> page() {
         return productRepository.findAll(Pageable.ofSize(10));
     }
