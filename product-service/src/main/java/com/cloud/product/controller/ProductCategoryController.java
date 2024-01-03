@@ -2,6 +2,7 @@ package com.cloud.product.controller;
 
 import com.cloud.product.dto.CategoryDto;
 import com.cloud.product.entity.ProductCategory;
+import com.cloud.product.enums.CategoryStatus;
 import com.cloud.product.service.ProductCategoryService;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Primary;
@@ -37,6 +38,7 @@ public class ProductCategoryController {
                                             .id(categoryDto.getId())
                                             .name(categoryDto.getName())
                                             .parentId(categoryDto.getParentId())
+                                            .status(CategoryStatus.ACTIVE)
                                             .build();
         productCategoryService.save(productCategory);
         return ResponseEntity.ok("OK");
