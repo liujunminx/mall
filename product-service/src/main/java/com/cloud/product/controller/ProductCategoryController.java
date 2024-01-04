@@ -49,4 +49,9 @@ public class ProductCategoryController {
         productCategoryService.delete(id);
         return ResponseEntity.ok("OK");
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductCategory>> search(@RequestParam("keyword") String keyword) {
+        return ResponseEntity.ok(productCategoryService.searchTree(keyword));
+    }
 }

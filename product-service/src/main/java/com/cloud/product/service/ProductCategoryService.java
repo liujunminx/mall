@@ -6,6 +6,7 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,6 +29,38 @@ public class ProductCategoryService {
         } else {
             return new ArrayList<>();
         }
+    }
+
+    public List<ProductCategory> searchTree(String keyword) {
+        return pruneCategories(listTree(), keyword);
+    }
+
+    private List<ProductCategory> pruneCategories(List<ProductCategory> categories, String keyword) {
+        Iterator<ProductCategory> iterator = categories.iterator();
+        while (iterator.hasNext()) {
+            ProductCategory category = iterator.next();
+            if (!containsKeyword(category, keyword) && !pruneCategory(category, keyword)) {
+                iterator.remove();
+            }
+        }
+        return categories;
+    }
+
+    private boolean pruneCategory(ProductCategory category, String keyword) {
+        if (category.getChildren() != null && !category.getChildren().isEmpty()) {
+            Iterator<ProductCategory> iterator = category.getChildren().iterator();
+            while (iterator.hasNext()) {
+                ProductCategory subCategory = iterator.next();
+                if (!containsKeyword(subCategory, keyword) && !pruneCategory(subCategory, keyword))
+                    iterator.remove();
+            }
+            return !category.getChildren().isEmpty();
+        }
+        return containsKeyword(category, keyword);
+    }
+
+    private boolean containsKeyword(ProductCategory category, String keyword) {
+        return category.getName().toLowerCase().contains(keyword.toLowerCase());
     }
 
     public void delete(Long id) {
