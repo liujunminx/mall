@@ -25,8 +25,8 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<String> save(@RequestBody List<Product> list) {
-        productService.save(list);
+    public ResponseEntity<String> save(@RequestBody Product product) {
+        productService.save(product);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 }

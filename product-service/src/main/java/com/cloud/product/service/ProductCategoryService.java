@@ -85,6 +85,10 @@ public class ProductCategoryService {
         return targetList;
     }
 
+    public List<ProductCategory> findAllLeafs() {
+        return productCategoryRepository.findAllLeafs();
+    }
+
     public void saveAll(List<ProductCategory> list) {
         productCategoryRepository.saveAll(list);
     }

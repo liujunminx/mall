@@ -54,4 +54,9 @@ public class ProductCategoryController {
     public ResponseEntity<List<ProductCategory>> search(@RequestParam("keyword") String keyword) {
         return ResponseEntity.ok(productCategoryService.searchTree(keyword));
     }
+
+    @GetMapping("/findAllLeafs")
+    public ResponseEntity<List<ProductCategory>> findAllLeafs() {
+        return ResponseEntity.ok(productCategoryService.findAllLeafs());
+    }
 }

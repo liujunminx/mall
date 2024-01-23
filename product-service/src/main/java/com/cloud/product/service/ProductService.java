@@ -15,8 +15,8 @@ public class ProductService {
     @Resource
     private ProductRepository productRepository;
 
-    public void save(List<Product> list) {
-        productRepository.saveAll(list);
+    public void save(Product product) {
+        productRepository.save(product);
     }
     public Page<Product> page() {
         return productRepository.findAll(Pageable.ofSize(10));
