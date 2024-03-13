@@ -2,6 +2,7 @@ package com.cloud.user.config;
 
 import com.cloud.user.exception.ConflictException;
 import com.cloud.user.exception.UnAuthorizedException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -9,11 +10,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
+@Slf4j
 public class CommonControllerAdvice {
 
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<String> handleInternalServerError(Exception e) {
+        log.error(e.getMessage(), e);
         return new ResponseEntity<>("internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

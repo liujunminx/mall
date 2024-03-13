@@ -18,10 +18,10 @@ spring:
           uri: lb://order-service
           predicates:
             - Path=/api/order/**
-        - id: product-service-route
-          uri: lb://product-service
+        - id: good-service-route
+          uri: lb://good-service
           predicates:
-            - Path=/api/product/**
+            - Path=/api/good/**
       default-filters:
         - StripPrefix=1
 eureka:

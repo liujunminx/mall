@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductImage {
+public class GoodImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

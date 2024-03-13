@@ -1,6 +1,5 @@
 package com.cloud.product.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Product {
+public class Good {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

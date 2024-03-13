@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "product_category")
@@ -14,7 +13,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductCategory {
+public class GoodCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,5 +25,5 @@ public class ProductCategory {
     private CategoryStatus status = CategoryStatus.ACTIVE;
 
     @Transient
-    private List<ProductCategory> children;
+    private List<GoodCategory> children;
 }

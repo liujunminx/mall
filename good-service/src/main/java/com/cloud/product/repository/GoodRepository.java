@@ -1,10 +1,10 @@
 package com.cloud.product.repository;
 
-import com.cloud.product.entity.Product;
+import com.cloud.product.entity.Good;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface GoodRepository extends JpaRepository<Good, Long> {
 
 }
