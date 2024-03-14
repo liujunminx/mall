@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public boolean authenticate(UserSignUpDto userDto) {
+    public boolean validatePwd(UserSignUpDto userDto) {
         User user = userRepository.findByUsername(userDto.username());
         if (user == null)
             return false;

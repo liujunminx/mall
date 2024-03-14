@@ -9,6 +9,7 @@
         <module>good-service</module>
         <module>order-service</module>
         <module>eureka-service</module>
+        <module>common-service</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

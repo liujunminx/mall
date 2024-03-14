@@ -1,6 +1,6 @@
 package com.cloud.gateway.config;
 
-import com.cloud.gateway.util.JwtUtil;
+import com.cloud.common.util.JwtUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -28,8 +28,8 @@ import java.util.List;
 
 @Component
 public class JwtTokenFilter implements GlobalFilter {
-    @Resource
-    private JwtUtil jwtUtil;
+
+    private JwtUtil jwtUtil = new JwtUtil();
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -43,10 +43,10 @@ public class JwtTokenFilter implements GlobalFilter {
         MultiValueMap<String, HttpCookie> cookies = request.getCookies();
         if (cookies.containsKey(tokenKey)) {
             String token = cookies.get(tokenKey).get(0).getValue();
-            if (jwtUtil.validateToken(token) == null)
-                return getVoidMono(response);
-            else
+            if (jwtUtil.validateToken(token))
                 return chain.filter(exchange);
+            else
+                return getVoidMono(response);
         }
         return getVoidMono(response);
     }
