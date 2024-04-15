@@ -1,4 +1,4 @@
-package com.cloud.product.entity;
+package com.cloud.good.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,13 +6,13 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "product_image")
+@Table(name = "good_image")
 @Setter
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GoodImage {
+public class GoodImage extends CommonEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,6 +1,6 @@
-package com.cloud.product.dto;
+package com.cloud.good.dto;
 
-import com.cloud.product.enums.CategoryStatus;
+import com.cloud.good.enums.CategoryStatus;
 import lombok.Data;
 
 @Data

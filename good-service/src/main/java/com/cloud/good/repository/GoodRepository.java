@@ -1,6 +1,6 @@
-package com.cloud.product.repository;
+package com.cloud.good.repository;
 
-import com.cloud.product.entity.Good;
+import com.cloud.good.entity.Good;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

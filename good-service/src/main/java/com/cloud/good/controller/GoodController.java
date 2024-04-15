@@ -1,7 +1,7 @@
-package com.cloud.product.controller;
+package com.cloud.good.controller;
 
-import com.cloud.product.entity.Good;
-import com.cloud.product.service.GoodService;
+import com.cloud.good.entity.Good;
+import com.cloud.good.service.GoodService;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping
 @RestController
-public class ProductController {
+public class GoodController {
 
     @Resource
     private GoodService goodService;
 
     @GetMapping("/listPage")
-    public ResponseEntity<Page<Good>> listPage() {
-        Page<Good> page = goodService.page();
+    public ResponseEntity<Page<Good>> listPage(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pageSize") Integer pageSize) {
+        Page<Good> page = goodService.page(pageNumber, pageSize);
         return new ResponseEntity<>(page, HttpStatus.OK);
     }
 

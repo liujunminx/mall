@@ -1,9 +1,10 @@
-package com.cloud.product.service;
+package com.cloud.good.service;
 
-import com.cloud.product.entity.Good;
-import com.cloud.product.repository.GoodRepository;
+import com.cloud.good.entity.Good;
+import com.cloud.good.repository.GoodRepository;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class GoodService {
     public void save(Good good) {
         goodRepository.save(good);
     }
-    public Page<Good> page() {
-        return goodRepository.findAll(Pageable.ofSize(10));
+    public Page<Good> page(int pageNumber, int pageSize) {
+        return goodRepository.findAll(PageRequest.of(pageNumber, pageSize));
     }
 }

@@ -1,4 +1,4 @@
-package com.cloud.product.enums;
+package com.cloud.good.enums;
 
 public enum CategoryStatus {
     ACTIVE,

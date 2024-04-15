@@ -1,19 +1,19 @@
-package com.cloud.product.entity;
+package com.cloud.good.entity;
 
-import com.cloud.product.enums.CategoryStatus;
+import com.cloud.good.enums.CategoryStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Table(name = "product_category")
+@Table(name = "category")
 @Setter
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GoodCategory {
+public class Category extends CommonEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,5 +25,5 @@ public class GoodCategory {
     private CategoryStatus status = CategoryStatus.ACTIVE;
 
     @Transient
-    private List<GoodCategory> children;
+    private List<Category> children;
 }
