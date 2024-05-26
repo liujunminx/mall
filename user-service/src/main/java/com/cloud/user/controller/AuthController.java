@@ -20,7 +20,7 @@ public class AuthController {
     @Resource
     private UserService userService;
 
-    private JwtUtil jwtUtil = new JwtUtil();
+    private final JwtUtil jwtUtil = new JwtUtil();
 
     @PostMapping("/signUp")
     public ResponseEntity<String> signUp(@RequestBody UserSignUpDto user) {

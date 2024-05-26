@@ -7,7 +7,7 @@ spring:
   datasource:
     username: root
     password: r00tme
-    url: jdbc:mysql://localhost:3306/user?serverTimezone=UTC
+    url: jdbc:mysql://mall:3306/user?serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

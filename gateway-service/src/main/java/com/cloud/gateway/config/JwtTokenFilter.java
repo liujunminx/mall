@@ -11,6 +11,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpCookie;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -29,20 +30,20 @@ import java.util.List;
 @Component
 public class JwtTokenFilter implements GlobalFilter {
 
-    private JwtUtil jwtUtil = new JwtUtil();
+    private final JwtUtil jwtUtil = new JwtUtil();
+
+
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
-        String tokenKey = "token";
         String uri = request.getURI().getPath();
-        if (uri.contains("/user/auth/signIn") || uri.contains("/user/auth/authenticate")) {
+        if (uri.contains("/user/auth/signIn") || uri.contains("/user/auth/authenticate") || uri.contains("/user/auth/signUp"))
             return chain.filter(exchange);
-        }
-        MultiValueMap<String, HttpCookie> cookies = request.getCookies();
-        if (cookies.containsKey(tokenKey)) {
-            String token = cookies.get(tokenKey).get(0).getValue();
+        String authorizationHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            String token = authorizationHeader.substring(7);
             if (jwtUtil.validateToken(token))
                 return chain.filter(exchange);
             else

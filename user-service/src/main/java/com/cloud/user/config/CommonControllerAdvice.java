@@ -24,6 +24,7 @@ public class CommonControllerAdvice {
     @ExceptionHandler(value = ConflictException.class)
     public ResponseEntity<String> handleConflict(Exception e) {
         ConflictException ex = (ConflictException) e;
+        ResponseEntity.ok();
         return new ResponseEntity<>(ex.getMessage(), ex.getCode());
     }
 

@@ -7,7 +7,7 @@ spring:
     name: order-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/order?serverTimezone=UTC
+    url: jdbc:mysql://mall:3306/order?serverTimezone=UTC
     username: root
     password: r00tme
   jpa:
