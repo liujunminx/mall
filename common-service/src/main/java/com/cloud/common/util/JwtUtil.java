@@ -20,8 +20,7 @@ import java.util.function.Function;
 
 @Slf4j
 public class JwtUtil {
-    private final String secret = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKvFcI4hEOp/wvKQApHWzHc3keMa+8G1\n" +
-            "l0TpBhDtupvV/mcOgFAFAXwsn58y+RF/MgGUsdkMVABjZKObggr0uGMCAwEAAQ==";
+    private final String secret = "Bv%2Kq@3nE!sD4gH7jP#5bF&8mY9tA$1oU*6iRw@0cXzLxV3nM";
 
     private final Key key = Keys.hmacShaKeyFor(secret.getBytes());
 

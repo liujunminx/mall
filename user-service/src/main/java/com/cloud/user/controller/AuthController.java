@@ -10,11 +10,13 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/auth")
 @RestController
+@Slf4j
 public class AuthController {
 
     @Resource
@@ -34,6 +36,7 @@ public class AuthController {
     public ResponseEntity<String> signIn(@RequestBody UserSignUpDto user, HttpServletResponse response) {
         if (userService.validatePwd(user)){
             String token = jwtUtil.generate(user.username());
+            log.info("generating token {}", token);
             Cookie cookie = new Cookie("token", token);
             cookie.setMaxAge(60*60*7);
             cookie.setPath("/");

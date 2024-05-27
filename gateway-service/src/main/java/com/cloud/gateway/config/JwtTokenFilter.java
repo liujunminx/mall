@@ -32,8 +32,6 @@ public class JwtTokenFilter implements GlobalFilter {
 
     private final JwtUtil jwtUtil = new JwtUtil();
 
-
-
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
