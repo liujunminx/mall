@@ -36,7 +36,6 @@ public class AuthController {
     public ResponseEntity<String> signIn(@RequestBody UserSignUpDto user, HttpServletResponse response) {
         if (userService.validatePwd(user)){
             String token = jwtUtil.generate(user.username());
-            log.info("generating token {}", token);
             Cookie cookie = new Cookie("token", token);
             cookie.setMaxAge(60*60*7);
             cookie.setPath("/");
@@ -48,8 +47,8 @@ public class AuthController {
             throw new UnAuthorizedException("Username or password incorrectly");
     }
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<Boolean> authenticate(@RequestBody String token) {
+    @GetMapping("/authenticate")
+    public ResponseEntity<Boolean> authenticate(@RequestParam String token) {
         boolean authenticate = jwtUtil.validateToken(token);
         return ResponseEntity.ok(authenticate);
     }
