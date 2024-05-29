@@ -6,7 +6,7 @@
     <modules>
         <module>gateway-service</module>
         <module>user-service</module>
-        <module>good-service</module>
+        <module>product-service</module>
         <module>order-service</module>
         <module>eureka-service</module>
         <module>common-service</module>
