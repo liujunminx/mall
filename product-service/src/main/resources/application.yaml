@@ -1,19 +1,19 @@
 server:
   port: 5003
   servlet:
-    context-path: /good
+    context-path: /product
 
 spring:
   datasource:
     username: root
     password: r00tme
-    url: jdbc:mysql://mall:3306/good?serverTimezone=UTC
+    url: jdbc:mysql://mall:3306/product?serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
   application:
-    name: good-service
+    name: product-service
 eureka:
   client:
     service-url:

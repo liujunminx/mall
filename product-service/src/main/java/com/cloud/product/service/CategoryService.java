@@ -36,31 +36,20 @@ public class CategoryService {
     }
 
     private List<Category> pruneCategories(List<Category> categories, String keyword) {
-        Iterator<Category> iterator = categories.iterator();
-        while (iterator.hasNext()) {
-            Category category = iterator.next();
-            if (!containsKeyword(category, keyword) && !pruneCategory(category, keyword)) {
-                iterator.remove();
-            }
-        }
+        categories.removeIf(category -> notContainsKeyword(category, keyword) && pruneCategory(category, keyword));
         return categories;
     }
 
     private boolean pruneCategory(Category category, String keyword) {
         if (category.getChildren() != null && !category.getChildren().isEmpty()) {
-            Iterator<Category> iterator = category.getChildren().iterator();
-            while (iterator.hasNext()) {
-                Category subCategory = iterator.next();
-                if (!containsKeyword(subCategory, keyword) && !pruneCategory(subCategory, keyword))
-                    iterator.remove();
-            }
-            return !category.getChildren().isEmpty();
+            category.getChildren().removeIf(subCategory -> notContainsKeyword(subCategory, keyword) && pruneCategory(subCategory, keyword));
+            return category.getChildren().isEmpty();
         }
-        return containsKeyword(category, keyword);
+        return notContainsKeyword(category, keyword);
     }
 
-    private boolean containsKeyword(Category category, String keyword) {
-        return category.getName().toLowerCase().contains(keyword.toLowerCase());
+    private boolean notContainsKeyword(Category category, String keyword) {
+        return !category.getName().toLowerCase().contains(keyword.toLowerCase());
     }
 
     public void delete(Long id) {
