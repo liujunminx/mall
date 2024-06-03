@@ -56,4 +56,10 @@ public class CategoryController {
     public ResponseEntity<List<Category>> findAllLeafs() {
         return ResponseEntity.ok(categoryService.findAllLeafs());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Category> findParentById(@PathVariable(value = "id") Long id) {
+        Category parent = categoryService.findById(id);
+        return ResponseEntity.ok(parent);
+    }
 }

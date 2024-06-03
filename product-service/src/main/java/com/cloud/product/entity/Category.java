@@ -23,7 +23,6 @@ public class Category extends CommonEntity{
     @Column(length = 32, columnDefinition = "varchar(32) default 'ACTIVE'")
     @Enumerated(value = EnumType.STRING)
     private CategoryStatus status = CategoryStatus.ACTIVE;
-
     @Transient
     private List<Category> children;
 }

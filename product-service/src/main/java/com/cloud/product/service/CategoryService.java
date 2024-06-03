@@ -1,14 +1,12 @@
 package com.cloud.product.service;
 
 import com.cloud.product.entity.Category;
+import com.cloud.product.enums.CategoryStatus;
 import com.cloud.product.repository.CategoryRepository;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,6 +27,21 @@ public class CategoryService {
         } else {
             return new ArrayList<>();
         }
+    }
+
+    public Category findById(Long id) {
+        Category category = null;
+        if(id == 0) {
+            category = Category
+                    .builder()
+                    .id(0L)
+                    .name("ROOT")
+                    .status(CategoryStatus.ACTIVE)
+                    .build();
+        } else {
+            category = categoryRepository.findById(id).orElse(null);
+        }
+        return category;
     }
 
     public List<Category> searchTree(String keyword) {

@@ -1,6 +1,6 @@
 package com.cloud.product.service;
 
-import com.cloud.product.entity.Spec;
+import com.cloud.product.entity.SpecGroup;
 import com.cloud.product.entity.SpecValue;
 import com.cloud.product.repository.SpecRepository;
 import com.cloud.product.repository.SpecValueRepository;
@@ -18,15 +18,15 @@ public class SpecService {
     @Resource
     private SpecValueRepository specValueRepository;
 
-    public void saveSpec(Spec spec) {
-        specRepository.save(spec);
+    public void saveSpec(SpecGroup specGroup) {
+        specRepository.save(specGroup);
     }
 
     public void saveSpecValue(SpecValue value) {
         specValueRepository.save(value);
     }
 
-    public Page<Spec> pageSpec(int pageNumber, int pageSize) {
+    public Page<SpecGroup> pageSpec(int pageNumber, int pageSize) {
         return specRepository.findAll(PageRequest.of(pageNumber, pageSize));
     }
 

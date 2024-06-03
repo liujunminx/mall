@@ -1,6 +1,6 @@
 package com.cloud.product.controller;
 
-import com.cloud.product.entity.Spec;
+import com.cloud.product.entity.SpecGroup;
 import com.cloud.product.entity.SpecValue;
 import com.cloud.product.service.SpecService;
 import jakarta.annotation.Resource;
@@ -16,9 +16,9 @@ public class SpecController {
     private SpecService specService;
 
     @PostMapping
-    public ResponseEntity<Long> save(@RequestBody Spec spec) {
-        specService.saveSpec(spec);
-        return ResponseEntity.ok(spec.getSpecId());
+    public ResponseEntity<Long> save(@RequestBody SpecGroup specGroup) {
+        specService.saveSpec(specGroup);
+        return ResponseEntity.ok(specGroup.getId());
     }
 
     @PostMapping("/value")
@@ -28,8 +28,8 @@ public class SpecController {
     }
 
     @GetMapping("/listPage")
-    public ResponseEntity<Page<Spec>> listPage(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pageSize") Integer pageSize) {
-        Page<Spec> page = specService.pageSpec(pageNumber, pageSize);
+    public ResponseEntity<Page<SpecGroup>> listPage(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pageSize") Integer pageSize) {
+        Page<SpecGroup> page = specService.pageSpec(pageNumber, pageSize);
         return ResponseEntity.ok(page);
     }
 }
