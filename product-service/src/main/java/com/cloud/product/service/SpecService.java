@@ -2,7 +2,7 @@ package com.cloud.product.service;
 
 import com.cloud.product.entity.SpecGroup;
 import com.cloud.product.entity.SpecValue;
-import com.cloud.product.repository.SpecRepository;
+import com.cloud.product.repository.SpecGroupRepository;
 import com.cloud.product.repository.SpecValueRepository;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
@@ -13,13 +13,13 @@ import org.springframework.stereotype.Service;
 public class SpecService {
 
     @Resource
-    private SpecRepository specRepository;
+    private SpecGroupRepository specGroupRepository;
 
     @Resource
     private SpecValueRepository specValueRepository;
 
     public void saveSpec(SpecGroup specGroup) {
-        specRepository.save(specGroup);
+        specGroupRepository.save(specGroup);
     }
 
     public void saveSpecValue(SpecValue value) {
@@ -27,7 +27,7 @@ public class SpecService {
     }
 
     public Page<SpecGroup> pageSpec(int pageNumber, int pageSize) {
-        return specRepository.findAll(PageRequest.of(pageNumber, pageSize));
+        return specGroupRepository.findAll(PageRequest.of(pageNumber, pageSize));
     }
 
     public Page<SpecValue> pageSpecValue(int pageNumber, int pageSize) {
