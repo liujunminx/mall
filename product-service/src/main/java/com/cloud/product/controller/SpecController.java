@@ -21,6 +21,12 @@ public class SpecController {
         return ResponseEntity.ok(specGroup.getId());
     }
 
+    @GetMapping
+    public ResponseEntity<SpecGroup> get(@PathVariable("id") Long id) {
+        SpecGroup sg = specService.findById(id);
+        return ResponseEntity.ok(sg);
+    }
+
     @PostMapping("/value")
     public ResponseEntity<Long> save(@RequestBody SpecValue specValue) {
         specService.saveSpecValue(specValue);

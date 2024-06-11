@@ -33,4 +33,8 @@ public class SpecService {
     public Page<SpecValue> pageSpecValue(int pageNumber, int pageSize) {
         return specValueRepository.findAll(PageRequest.of(pageNumber, pageSize));
     }
+
+    public SpecGroup findById(Long id) {
+        return specGroupRepository.findById(id).orElse(null);
+    }
 }
