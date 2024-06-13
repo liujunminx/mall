@@ -1,13 +1,18 @@
 package com.cloud.product.service;
 
+import com.cloud.product.dto.SpecDto;
 import com.cloud.product.entity.SpecGroup;
-import com.cloud.product.entity.SpecValue;
+import com.cloud.product.repository.CategoryRepository;
 import com.cloud.product.repository.SpecGroupRepository;
-import com.cloud.product.repository.SpecValueRepository;
 import jakarta.annotation.Resource;
+import jakarta.persistence.criteria.Predicate;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SpecService {
@@ -16,25 +21,35 @@ public class SpecService {
     private SpecGroupRepository specGroupRepository;
 
     @Resource
-    private SpecValueRepository specValueRepository;
+    private CategoryRepository categoryRepository;
 
     public void saveSpec(SpecGroup specGroup) {
         specGroupRepository.save(specGroup);
     }
 
-    public void saveSpecValue(SpecValue value) {
-        specValueRepository.save(value);
+    public Page<SpecGroup> pageSpecByName(int pageNumber, int pageSize, String keyword) {
+        return specGroupRepository.findAll((root, query, builder) -> {
+            List<Predicate> list = new ArrayList<>();
+            if(StringUtils.isNotBlank(keyword)) {
+                list.add(builder.like(root.get("name"), "%" + keyword + "%"));
+            }
+            Predicate[] pd = new Predicate[list.size()];
+            query.where(list.toArray(pd));
+            return query.getRestriction();
+        }, PageRequest.of(pageNumber, pageSize));
     }
 
-    public Page<SpecGroup> pageSpec(int pageNumber, int pageSize) {
-        return specGroupRepository.findAll(PageRequest.of(pageNumber, pageSize));
+    public SpecDto findDtoById(Long id) {
+        SpecGroup specGroup = specGroupRepository.findById(id).orElse(null);
+        SpecDto specDto = new SpecDto();
+        if (specGroup != null) {
+            specDto.setSpecGroup(specGroup);
+            categoryRepository.findById(specGroup.getCategoryId()).ifPresent(specDto::setCategory);
+        }
+        return specDto;
     }
 
-    public Page<SpecValue> pageSpecValue(int pageNumber, int pageSize) {
-        return specValueRepository.findAll(PageRequest.of(pageNumber, pageSize));
-    }
-
-    public SpecGroup findById(Long id) {
-        return specGroupRepository.findById(id).orElse(null);
+    public void deleteById(Long id) {
+        specGroupRepository.deleteById(id);
     }
 }
