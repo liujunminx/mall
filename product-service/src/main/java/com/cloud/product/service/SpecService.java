@@ -52,4 +52,8 @@ public class SpecService {
     public void deleteById(Long id) {
         specGroupRepository.deleteById(id);
     }
+
+    public List<SpecGroup> findByCategoryId(Long categoryId) {
+        return specGroupRepository.findByCategoryId(categoryId);
+    }
 }

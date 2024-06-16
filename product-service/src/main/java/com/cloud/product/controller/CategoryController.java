@@ -28,7 +28,7 @@ public class CategoryController {
         return ResponseEntity.ok("OK");
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<String> save(@RequestBody CategoryDto categoryDto) {
         Category category = Category
                                 .builder()

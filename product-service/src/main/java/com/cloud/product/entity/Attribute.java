@@ -1,10 +1,7 @@
 package com.cloud.product.entity;
 
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Entity
 @Table(name = "attribute")
@@ -21,5 +18,5 @@ public class Attribute extends CommonEntity{
     private String name;
     private Long specId;
     private Long categoryId;
-    private String values;
+    private String value;
 }

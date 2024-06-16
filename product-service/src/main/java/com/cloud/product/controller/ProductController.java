@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping
 @RestController
-public class GoodController {
+public class ProductController {
 
     @Resource
     private ProductService productService;
@@ -21,7 +21,7 @@ public class GoodController {
         return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<String> save(@RequestBody Product product) {
         productService.save(product);
         return new ResponseEntity<>("OK", HttpStatus.OK);

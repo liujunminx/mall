@@ -1,5 +1,6 @@
 package com.cloud.product.controller;
 
+import com.cloud.product.dto.AttributeDto;
 import com.cloud.product.entity.Attribute;
 import com.cloud.product.service.AttributeService;
 import jakarta.annotation.Resource;
@@ -22,16 +23,15 @@ public class AttributeController {
         return ResponseEntity.ok(page);
     }
 
-
-    @PutMapping
+    @PostMapping
     public ResponseEntity<Long> save(@RequestBody Attribute attribute) {
         attributeService.save(attribute);
         return ResponseEntity.ok(attribute.getId());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Attribute> findById(@PathVariable("id") Long id) {
-        Attribute attribute = attributeService.findById(id);
+    public ResponseEntity<AttributeDto> findById(@PathVariable("id") Long id) {
+        AttributeDto attribute = attributeService.findById(id);
         return ResponseEntity.ok(attribute);
     }
 

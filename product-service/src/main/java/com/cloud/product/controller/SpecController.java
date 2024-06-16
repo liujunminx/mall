@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/spec")
 public class SpecController {
@@ -16,7 +18,7 @@ public class SpecController {
     @Resource
     private SpecService specService;
 
-    @PutMapping
+    @PostMapping
     public ResponseEntity<Long> save(@RequestBody SpecGroup specGroup) {
         specService.saveSpec(specGroup);
         return ResponseEntity.ok(specGroup.getId());
@@ -38,8 +40,13 @@ public class SpecController {
     public ResponseEntity<Page<SpecGroup>> listPage(@RequestParam("pageNumber") Integer pageNumber,
                                                     @RequestParam("pageSize") Integer pageSize,
                                                     @RequestParam("keyword") String keyword) {
-
         Page<SpecGroup> page = specService.pageSpecByName(pageNumber, pageSize, keyword);
         return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<SpecGroup>> findByCategoryId(@PathVariable("categoryId") Long categoryId) {
+        List<SpecGroup> specGroupList = specService.findByCategoryId(categoryId);
+        return ResponseEntity.ok(specGroupList);
     }
 }
