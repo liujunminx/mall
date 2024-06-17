@@ -1,8 +1,6 @@
 package com.cloud.product.controller;
 
-import com.cloud.product.dto.SpecDto;
-import com.cloud.product.entity.SpecGroup;
-import com.cloud.product.entity.Attribute;
+import com.cloud.product.entity.Spec;
 import com.cloud.product.service.SpecService;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
@@ -19,15 +17,15 @@ public class SpecController {
     private SpecService specService;
 
     @PostMapping
-    public ResponseEntity<Long> save(@RequestBody SpecGroup specGroup) {
-        specService.saveSpec(specGroup);
-        return ResponseEntity.ok(specGroup.getId());
+    public ResponseEntity<Long> save(@RequestBody Spec spec) {
+        Long specId = specService.saveSpec(spec);
+        return ResponseEntity.ok(specId);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SpecDto> get(@PathVariable("id") Long id) {
-        SpecDto specDto = specService.findDtoById(id);
-        return ResponseEntity.ok(specDto);
+    public ResponseEntity<Spec> get(@PathVariable("id") Long id) {
+        Spec spec = specService.findDtoById(id);
+        return ResponseEntity.ok(spec);
     }
 
     @DeleteMapping("/{id}")
@@ -36,17 +34,17 @@ public class SpecController {
         return ResponseEntity.ok(null);
     }
 
-    @GetMapping("/listPage")
-    public ResponseEntity<Page<SpecGroup>> listPage(@RequestParam("pageNumber") Integer pageNumber,
-                                                    @RequestParam("pageSize") Integer pageSize,
-                                                    @RequestParam("keyword") String keyword) {
-        Page<SpecGroup> page = specService.pageSpecByName(pageNumber, pageSize, keyword);
+    @GetMapping("/page")
+    public ResponseEntity<Page<Spec>> page(@RequestParam("pageNumber") Integer pageNumber,
+                                           @RequestParam("pageSize") Integer pageSize,
+                                           @RequestParam("keyword") String keyword) {
+        Page<Spec> page = specService.pageByKeyword(pageNumber, pageSize, keyword);
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/category/{categoryId}")
-    public ResponseEntity<List<SpecGroup>> findByCategoryId(@PathVariable("categoryId") Long categoryId) {
-        List<SpecGroup> specGroupList = specService.findByCategoryId(categoryId);
-        return ResponseEntity.ok(specGroupList);
+    public ResponseEntity<List<Spec>> findByCategoryId(@PathVariable("categoryId") Long categoryId) {
+        List<Spec> specList = specService.findByCategoryId(categoryId);
+        return ResponseEntity.ok(specList);
     }
 }

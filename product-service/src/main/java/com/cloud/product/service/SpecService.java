@@ -1,9 +1,8 @@
 package com.cloud.product.service;
 
-import com.cloud.product.dto.SpecDto;
-import com.cloud.product.entity.SpecGroup;
+import com.cloud.product.entity.Spec;
 import com.cloud.product.repository.CategoryRepository;
-import com.cloud.product.repository.SpecGroupRepository;
+import com.cloud.product.repository.SpecRepository;
 import jakarta.annotation.Resource;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang.StringUtils;
@@ -18,17 +17,18 @@ import java.util.List;
 public class SpecService {
 
     @Resource
-    private SpecGroupRepository specGroupRepository;
+    private SpecRepository specRepository;
 
     @Resource
     private CategoryRepository categoryRepository;
 
-    public void saveSpec(SpecGroup specGroup) {
-        specGroupRepository.save(specGroup);
+    public Long saveSpec(Spec spec) {
+        Spec save = specRepository.save(spec);
+        return save.getId();
     }
 
-    public Page<SpecGroup> pageSpecByName(int pageNumber, int pageSize, String keyword) {
-        return specGroupRepository.findAll((root, query, builder) -> {
+    public Page<Spec> pageByKeyword(int pageNumber, int pageSize, String keyword) {
+        return specRepository.findAll((root, query, builder) -> {
             List<Predicate> list = new ArrayList<>();
             if(StringUtils.isNotBlank(keyword)) {
                 list.add(builder.like(root.get("name"), "%" + keyword + "%"));
@@ -39,21 +39,15 @@ public class SpecService {
         }, PageRequest.of(pageNumber, pageSize));
     }
 
-    public SpecDto findDtoById(Long id) {
-        SpecGroup specGroup = specGroupRepository.findById(id).orElse(null);
-        SpecDto specDto = new SpecDto();
-        if (specGroup != null) {
-            specDto.setSpecGroup(specGroup);
-            categoryRepository.findById(specGroup.getCategoryId()).ifPresent(specDto::setCategory);
-        }
-        return specDto;
+    public Spec findDtoById(Long id) {
+        return specRepository.findById(id).orElse(null);
     }
 
     public void deleteById(Long id) {
-        specGroupRepository.deleteById(id);
+        specRepository.deleteById(id);
     }
 
-    public List<SpecGroup> findByCategoryId(Long categoryId) {
-        return specGroupRepository.findByCategoryId(categoryId);
+    public List<Spec> findByCategoryId(Long categoryId) {
+        return specRepository.findByCategoryId(categoryId);
     }
 }

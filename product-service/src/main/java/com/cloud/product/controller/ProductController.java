@@ -15,8 +15,8 @@ public class ProductController {
     @Resource
     private ProductService productService;
 
-    @GetMapping("/listPage")
-    public ResponseEntity<Page<Product>> listPage(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pageSize") Integer pageSize) {
+    @GetMapping("/page")
+    public ResponseEntity<Page<Product>> page(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pageSize") Integer pageSize) {
         Page<Product> page = productService.page(pageNumber, pageSize);
         return new ResponseEntity<>(page, HttpStatus.OK);
     }

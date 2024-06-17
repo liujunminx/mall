@@ -1,6 +1,7 @@
 package com.cloud.product.controller;
 
-import com.cloud.product.dto.AttributeDto;
+import com.cloud.product.dto.AttributeEditViewDto;
+import com.cloud.product.dto.AttributePageDto;
 import com.cloud.product.entity.Attribute;
 import com.cloud.product.service.AttributeService;
 import jakarta.annotation.Resource;
@@ -15,11 +16,11 @@ public class AttributeController {
     @Resource
     private AttributeService attributeService;
 
-    @GetMapping("/listPage")
-    public ResponseEntity<Page<Attribute>> listPage(@RequestParam("pageNumber") Integer pageNumber,
-                                              @RequestParam("pageSize") Integer pageSize,
-                                              @RequestParam("keyword") String keyword) {
-        Page<Attribute> page = attributeService.page(pageNumber, pageSize, keyword);
+    @GetMapping("/page")
+    public ResponseEntity<Page<AttributePageDto>> page(@RequestParam("pageNumber") Integer pageNumber,
+                                                       @RequestParam("pageSize") Integer pageSize,
+                                                       @RequestParam("keyword") String keyword) {
+        Page<AttributePageDto> page = attributeService.page(pageNumber, pageSize, keyword);
         return ResponseEntity.ok(page);
     }
 
@@ -30,9 +31,15 @@ public class AttributeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AttributeDto> findById(@PathVariable("id") Long id) {
-        AttributeDto attribute = attributeService.findById(id);
+    public ResponseEntity<Attribute> findById(@PathVariable("id") Long id) {
+        Attribute attribute = attributeService.findById(id);
         return ResponseEntity.ok(attribute);
+    }
+
+    @GetMapping("/edit/{id}")
+    public ResponseEntity<AttributeEditViewDto> viewEdit(@PathVariable("id") Long id) {
+        AttributeEditViewDto dto = attributeService.findEditView(id);
+        return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
