@@ -9,6 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/attr")
 public class AttributeController {
@@ -22,6 +25,12 @@ public class AttributeController {
                                                        @RequestParam("keyword") String keyword) {
         Page<AttributePageDto> page = attributeService.page(pageNumber, pageSize, keyword);
         return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/category/map")
+    public ResponseEntity<Map<String, List<Attribute>>> mapByCategoryId(@RequestParam("categoryId") Long categoryId) {
+        Map<String, List<Attribute>> map = attributeService.findMapByCategoryId(categoryId);
+        return ResponseEntity.ok(map);
     }
 
     @PostMapping

@@ -37,4 +37,8 @@ public class BrandService {
             return query.getRestriction();
         }, PageRequest.of(pageNumber, pageSize));
     }
+
+    public List<Brand> findAll() {
+        return brandRepository.findAll();
+    }
 }

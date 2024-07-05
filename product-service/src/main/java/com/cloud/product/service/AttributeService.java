@@ -8,6 +8,7 @@ import com.cloud.product.repository.AttributeRepository;
 import com.cloud.product.repository.CategoryRepository;
 import com.cloud.product.repository.SpecRepository;
 import jakarta.annotation.Resource;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class AttributeService {
@@ -55,5 +58,11 @@ public class AttributeService {
 
     public void deleteById(Long id) {
         attributeRepository.deleteById(id);
+    }
+
+    public Map<String, List<Attribute>> findMapByCategoryId(Long categoryId) {
+        List<Attribute> attributeList = attributeRepository.findByCategory_Id(categoryId);
+        Map<String, List<Attribute>> map = attributeList.stream().collect(Collectors.groupingBy(attribute -> attribute.getSpec().getName()));
+        return map;
     }
 }

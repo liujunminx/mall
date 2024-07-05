@@ -8,12 +8,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/brand")
 public class BrandController {
 
     @Resource
     private BrandService brandService;
+
+    @GetMapping
+    public ResponseEntity<List<Brand>> findAll() {
+        List<Brand> list = brandService.findAll();
+        return ResponseEntity.ok(list);
+    }
 
     @GetMapping("/page")
     public ResponseEntity<Page<Brand>> page(@RequestParam("pageNumber") Integer pageNumber,

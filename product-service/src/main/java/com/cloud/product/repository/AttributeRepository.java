@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AttributeRepository extends JpaRepository<Attribute, Long>, JpaSpecificationExecutor<Attribute> {
 
@@ -19,4 +21,6 @@ public interface AttributeRepository extends JpaRepository<Attribute, Long>, Jpa
             "JOIN a.category c " +
             "WHERE (:keyword is null or a.name LIKE %:keyword%)")
     Page<AttributePageDto> findAllAttributes(String keyword, Pageable pageable);
+
+    List<Attribute> findByCategory_Id(Long id);
 }
